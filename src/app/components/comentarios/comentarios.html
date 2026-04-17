@@ -1,0 +1,49 @@
+<div style="max-width: 600px; margin: 20px auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border: 1px solid #ddd; padding: 25px; border-radius: 12px; background: white; shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  
+  <h2 style="text-align: center; color: #333;">💬 Sistema de Comentarios</h2>
+  
+  <form [formGroup]="miForm" (ngSubmit)="enviar()" style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+    <div style="margin-bottom: 12px;">
+      <label style="display:block; margin-bottom:5px; font-weight:bold;">Nombre:</label>
+      <input type="text" formControlName="name" placeholder="Ej. Rony Jans" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+    
+    <div style="margin-bottom: 12px;">
+      <label style="display:block; margin-bottom:5px; font-weight:bold;">Correo electrónico:</label>
+      <input type="email" formControlName="email" placeholder="correo@ejemplo.com" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+
+    <div style="margin-bottom: 12px;">
+      <label style="display:block; margin-bottom:5px; font-weight:bold;">Comentario:</label>
+      <textarea formControlName="body" placeholder="Escribe aquí tu mensaje..." style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; height: 100px; box-sizing: border-box;"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="miForm.invalid" style="background: #007bff; color: white; border: none; padding: 12px; cursor: pointer; width: 100%; border-radius: 6px; font-weight: bold; font-size: 16px;">
+      Publicar Comentario
+    </button>
+  </form>
+
+  <p *ngIf="confirmacion" style="color: #28a745; font-weight: bold; text-align: center; margin-top: 15px; padding: 10px; background: #e9f7ef; border-radius: 5px;">{{ confirmacion }}</p>
+
+  <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+  <h3 style="display: flex; justify-content: space-between; align-items: center; color: #444;">
+    Mis comentarios 
+    <span style="background: #007bff; color: white; padding: 4px 15px; border-radius: 20px; font-size: 14px;">
+      Total: {{ comentarios.length }}
+    </span>
+  </h3>
+  
+  <p *ngIf="comentarios.length === 0" style="color: #999; text-align: center; margin-top: 20px;">No hay comentarios publicados todavía. ¡Sé el primero!</p>
+
+  <div *ngFor="let c of comentarios" style="background: #ffffff; padding: 15px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #eee; border-left: 6px solid #007bff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f1f1; padding-bottom: 8px; margin-bottom: 10px;">
+      <strong style="color: #333; font-size: 1.1em;">{{ c.name }}</strong>
+      <small style="color: #007bff; font-weight: 500;">{{ c.email }}</small>
+    </div>
+    <p style="margin: 0; color: #555; line-height: 1.5;">{{ c.body }}</p>
+    <div style="text-align: right; margin-top: 10px;">
+      <small style="color: #aaa; font-size: 0.85em;">📅 {{ c.fecha }}</small>
+    </div>
+  </div>
+</div>
